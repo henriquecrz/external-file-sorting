@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private int _rg;
     private String _name;
     private String _birthday;
@@ -33,6 +33,17 @@ public class Person {
     @Override
     public String toString() {
         return "\nPerson\n------\nRG: " + getRg() + "\nName: " + getName() + "\nBirthday: " + getBirthday() + "\n";
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        if (getRg() > person.getRg()) {
+            return 1;
+        } else if (getRg() < person.getRg()) {
+            return -1;
+        }
+
+        return 0;
     }
 
     public void saveToFile(RandomAccessFile file) throws IOException {
@@ -82,5 +93,25 @@ public class Person {
         }
 
         return null;
+    }
+
+    public static Person readFromFile(RandomAccessFile file) {
+        int rg = 0;
+        String name = Constant.EMPTY_STRING;
+        String birthday = Constant.EMPTY_STRING;
+
+        try {
+            rg = file.readInt();
+            name = file.readUTF();
+            birthday = file.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new Person(rg, name, birthday);
+    }
+
+    public static Person getSeparator() {
+        return new Person(-1, " ", " ");
     }
 }
