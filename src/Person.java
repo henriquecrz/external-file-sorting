@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class Person implements Comparable<Person> {
+public class Person {
     private int _rg;
     private String _name;
     private String _birthday;
@@ -33,17 +33,6 @@ public class Person implements Comparable<Person> {
     @Override
     public String toString() {
         return "\nPerson\n------\nRG: " + getRg() + "\nName: " + getName() + "\nBirthday: " + getBirthday() + "\n";
-    }
-
-    @Override
-    public int compareTo(Person person) {
-        if (getRg() > person.getRg()) {
-            return 1;
-        } else if (getRg() < person.getRg()) {
-            return -1;
-        }
-
-        return 0;
     }
 
     public void saveToFile(RandomAccessFile file) throws IOException {
