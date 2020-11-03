@@ -11,7 +11,7 @@ public class Converter {
             File inputFile = new File(inputFileName);
             Scanner inputFileScanner = new Scanner(inputFile);
             File binaryFile = new File(binaryFileName);
-            RandomAccessFile binaryFileScanner = new RandomAccessFile(binaryFile, Constant.READ_WRITE_ACCESS_MODE);
+            RandomAccessFile binaryFileScanner = new RandomAccessFile(binaryFile, AccessMode.READ_WRITE);
             binaryFileScanner.setLength(0);
             binaryFileScanner.writeInt(0);
 
